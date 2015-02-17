@@ -6,5 +6,5 @@ if [ $? != 0 ]
 	then exit
 fi
 echo "running tests.."
-java -cp ".;junit-4.10.jar" org.junit.runner.JUnitCore WcTest
+java -cp ".;junit-4.10.jar" org.junit.runner.JUnitCore WcLibTest
 echo $?

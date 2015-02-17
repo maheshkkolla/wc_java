@@ -1,24 +1,20 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 public class Wc {
-	String fileContent;
-	public Wc(String data){
-		fileContent = data;
-	}
+	public static void main(String[] args) {
+		String fileData = "";
 
-	public int getLineCount(){
-		int count = 0;
-		for (int i = 0; i < this.getCharCount() ;i++ ) {
-			if(fileContent.charAt(i) == '\n')count++;
+		try{
+			BufferedReader br = new BufferedReader(new FileReader(args[0]));
+			String newLine;
+			while ((newLine = br.readLine()) != null){fileData += newLine+"\r\n";}
+		} catch(Exception err){
+			System.out.println("Error--------"+err);
 		}
-		return count;
-	}
-
-	public int getCharCount() {
-		return fileContent.length();
-	}
-
-	public int getWordCount() {
-		String str = fileContent.replaceAll("\\s+", " ");
-		String[] words = str.split(" ");
-		return words.length;
+		WcLib count = new WcLib(fileData);
+		count.callAllCounts();
+		System.out.println("\t"+count.lineCount+"\t"+count.wordCount+"\t"+count.charCount+"\t"+args[0]);
 	}
 }
