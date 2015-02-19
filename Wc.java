@@ -2,6 +2,7 @@
 // import java.io.FileReader;
 // import java.io.IOException;
 import java.io.*;
+import java.lang.*;
 
 public class Wc {
 	public static void main(String[] args) throws IOException  {
@@ -11,9 +12,13 @@ public class Wc {
 		System.out.println("\t"+wc.lineCount+"\t"+wc.wordCount+"\t"+wc.charCount+"\t"+args[0]);
 	}
 
-	// public static char[] getOptions() {
-
-	// }
+	public static String[] getOptions(String[] args) {
+		String options = new String();
+		for(String arg : args){
+			if(arg.charAt(0) == '-')options += arg.charAt(1);
+		}
+		return options.split("");
+	}
 
 	// public static String[] getFileNames() {
 
