@@ -8,11 +8,12 @@ public class Wc {
 	public static void main(String[] args) throws IOException  {
 		String[] options = Wc.getOptions(args);
 		WcFile[] allFiles = Wc.readAllFiles(args); 
-		WcLib[] allWcCounts = new WcLib[allFiles.length];
+		WcLib[] allWcs = new WcLib[allFiles.length];
+		WcCounts[] allWcCounts = new WcCounts[allFiles.length];
 		for(int i=0; i<allFiles.length;i++) {
-			allWcCounts[i] = new WcLib(allFiles[i].fileContent);
-			allWcCounts[i].callAllCounts();
-			System.out.println("\t"+allWcCounts[i].lineCount+"\t"+allWcCounts[i].wordCount+"\t"+allWcCounts[i].charCount+"\t"+allFiles[i].fileName);
+			allWcs[i] = new WcLib(allFiles[i].fileContent);
+			allWcCounts[i] = new WcCounts(allFiles[i].fileName, allWcs[i]);	
+			allWcCounts[i].printCounts();
 		}
 	}
 	public static String[] getOptions(String[] args) {
@@ -67,5 +68,19 @@ class WcFile {
 	public WcFile(String fileName, String fileContent) {
 		this.fileName = fileName;
 		this.fileContent = fileContent;
+	}
+}
+
+class WcCounts {
+	String fileName;
+	WcLib wc;
+	public WcCounts(String fileName, WcLib wc) {
+		this.fileName = fileName;
+		this.wc = wc;
+	}
+
+	public void printCounts() {
+		this.wc.callAllCounts();
+		System.out.println("\t"+wc.lineCount+"\t"+wc.wordCount+"\t"+wc.charCount+"\t"+fileName);
 	}
 }
