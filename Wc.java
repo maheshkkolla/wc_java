@@ -8,6 +8,12 @@ public class Wc {
 	public static void main(String[] args) throws IOException  {
 		String[] options = Wc.getOptions(args);
 		WcFile[] allFiles = Wc.readAllFiles(args); 
+		WcLib[] allWcCounts = new WcLib[allFiles.length];
+		for(int i=0; i<allFiles.length;i++) {
+			allWcCounts[i] = new WcLib(allFiles[i].fileContent);
+			allWcCounts[i].callAllCounts();
+			System.out.println("\t"+allWcCounts[i].lineCount+"\t"+allWcCounts[i].wordCount+"\t"+allWcCounts[i].charCount+"\t"+allFiles[i].fileName);
+		}
 	}
 	public static String[] getOptions(String[] args) {
 		String options = new String();
