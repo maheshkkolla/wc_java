@@ -56,4 +56,16 @@ public class WcLibTest {
 		int wordCount = count.getWordCount();
 		assertEquals(wordCount, 7);
 	}
+	@Test
+	public void getLongestLineLength_gives_the_length_of_the_whole_string_if_there_is_only_one_line() {
+		WcLib count = new WcLib("Hello");
+		int LLCount = count.getLongestLineLength();
+		assertEquals(LLCount, 5);
+	}
+	@Test
+	public void getLongestLineLength_gives_the_length_of_the_longest_line() {
+		WcLib count = new WcLib("Hello Hello Hello \r\nHello Hello Hello hai\r\n  Hello Hello");
+		int LLCount = count.getLongestLineLength();
+		assertEquals(LLCount, 21);
+	}
 }

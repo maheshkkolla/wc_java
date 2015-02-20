@@ -3,8 +3,11 @@ public class WcLib {
 	int wordCount;
 	int charCount;
 	int lineCount;
+	int longestLineLength;
+	String longestLine;
 	public WcLib(String data){
 		fileContent = data;
+		longestLineLength = 0;
 	}
 
 	public int getLineCount(){
@@ -28,10 +31,22 @@ public class WcLib {
 		return wordCount;
 	}
 
+	public int getLongestLineLength() {
+		String[] lines = this.fileContent.split("\r\n");
+		for(String line: lines){
+			if(line.length() > longestLineLength){
+				longestLineLength = line.length();
+				longestLine = line;
+			}
+		}
+		return longestLineLength;
+	}
+
 	public void callAllCounts() {
 		getLineCount();
 		getCharCount();
 		getWordCount();
+		getLongestLineLength();
 	}
 
 }
