@@ -129,6 +129,9 @@ class WcCounts {
 			case "c": previousCounts += wc.charCount + "\t";
 			break;
 			case "L": previousCounts = wc.longestLineLength+"\t"+wc.longestLine+"\t";
+			break;
+			case "S": previousCounts = wc.shortestLineLength+"\t"+wc.shortestLine+"\t";
+			break;
 		}
 		return previousCounts;
 	} 

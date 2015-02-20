@@ -5,6 +5,8 @@ public class WcLib {
 	int lineCount;
 	int longestLineLength;
 	String longestLine;
+	int shortestLineLength;
+	String shortestLine;
 	public WcLib(String data){
 		fileContent = data;
 		longestLineLength = 0;
@@ -42,11 +44,24 @@ public class WcLib {
 		return longestLineLength;
 	}
 
+	public int getShortestLineLength() {
+		String[] lines = this.fileContent.split("\r\n");
+		shortestLineLength = lines[0].length();
+		for(String line: lines){
+			if(line.length() < shortestLineLength){
+				shortestLineLength = line.length();
+				shortestLine = line;
+			}
+		}
+		return shortestLineLength;
+	}
+
 	public void callAllCounts() {
 		getLineCount();
 		getCharCount();
 		getWordCount();
 		getLongestLineLength();
+		getShortestLineLength();
 	}
 
 }
