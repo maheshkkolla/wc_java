@@ -6,10 +6,8 @@ import java.lang.*;
 
 public class Wc {
 	public static void main(String[] args) throws IOException  {
-		String fileData = Wc.getFileContent(args[0]);
-		WcLib wc = new WcLib(fileData);
-		wc.callAllCounts();
-		System.out.println("\t"+wc.lineCount+"\t"+wc.wordCount+"\t"+wc.charCount+"\t"+args[0]);
+		String[] options = Wc.getOptions(args);
+		WcFile[] allFiles = Wc.readAllFiles(args); 
 	}
 	public static String[] getOptions(String[] args) {
 		String options = new String();
@@ -34,8 +32,26 @@ public class Wc {
 		}
 		return countOfFiles;
 	}
+
+	public static String[] getFileNames(String[] args) {
+		String[] fileNames = new String[Wc.getNoOfFiles(args)];
+		int index = 0;
+		for(String arg: args){
+			if(arg.charAt(0) != '-') {
+				fileNames[index] = arg;
+				index++;
+			}
+		}
+		return fileNames;
+	}
 	public static WcFile[] readAllFiles(String[] args) {
-		WcFile[] allFiles = new WcFile[Wc.getNoOfFiles(args)];
+		int noOfFiles = Wc.getNoOfFiles(args);
+		WcFile[] allFiles = new WcFile[noOfFiles];
+		String[] fileNames = Wc.getFileNames(args);
+		for(int i =0; i<noOfFiles; i++){
+			String fileName = fileNames[i];
+			allFiles[i] = new WcFile(fileName, Wc.getFileContent(fileName));
+		}
 		return allFiles;
 	}
 }

@@ -27,4 +27,15 @@ public class WcTest {
 		String[] options = Wc.getOptions(args);
 		assertEquals(options, optionsExpected);
 	}
+	@Test
+	public void getFileNames_gives_the_all_fileNames_sent_as_arguments() {
+		String[] args = {"one","two","three"};
+		assertEquals(Wc.getFileNames(args), args);
+	}
+	@Test
+	public void getFileNames_gives_the_all_fileNames_sent_as_arguments_by_excluding_the_options() {
+		String[] args = {"one","-l","two","-c","-b","three","four","-w"};
+		String[] expectedFileNames = {"one","two","three","four"};
+		assertEquals(Wc.getFileNames(args), expectedFileNames);
+	}
 }
