@@ -44,7 +44,7 @@ public class Wc {
 		}
 		return fileNames;
 	}
-	public static WcFile[] readAllFiles(String[] args) {
+	public static WcFile[] readAllFiles(String[] args) throws IOException{
 		int noOfFiles = Wc.getNoOfFiles(args);
 		WcFile[] allFiles = new WcFile[noOfFiles];
 		String[] fileNames = Wc.getFileNames(args);
